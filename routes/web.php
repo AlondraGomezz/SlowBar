@@ -1,0 +1,57 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Models\Product;
+
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PromotionController;
+
+Route::get('/', function () {
+    $products = Product::latest()->take(6)->get();
+    return view('welcome', compact('products'));
+
+});
+
+Route::get('/menu', function () {
+    $products = Product::all();
+    return view('menu', compact('products'));
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/promotions', [PromotionController::class, 'publicIndex'])
+    ->name('promotions.public');
+
+Route::post('/make-order/{id}', [OrderController::class, 'makeOrder'])
+    ->middleware('auth')
+    ->name('make.order');
+
+Route::get('/my-orders',
+    [OrderController::class, 'myOrders'])
+    ->middleware('auth')
+    ->name('my.orders');
+
+Route::put('/orders/{id}/status',
+    [OrderController::class, 'updateStatus'])
+    ->middleware(['auth', 'admin'])
+    ->name('orders.status');
+
+// rutas admin
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('products', ProductController::class);
+    Route::resource('clients', ClientController::class);
+    Route::resource('orders', OrderController::class);
+
+});
+
+require __DIR__.'/auth.php';
