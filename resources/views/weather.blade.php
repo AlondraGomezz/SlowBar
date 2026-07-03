@@ -25,9 +25,17 @@
                     <i class="fa fa-cloud-sun"></i>
                     Buscar clima
                 </button>
+
+                <div id="loading" class="text-center mt-4" style="display:none;">
+                    <div class="spinner-border coffee-text"></div>
+                    <p class="mt-3 text-light">
+                        Consultando clima...
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+
     <div id="resultado" class="mt-5"></div>
 </div>
 
@@ -47,8 +55,9 @@ async function buscarClima(){
 
     const apiKey = "{{ $apiKey }}";
     const url=`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`;
-
+    
     try{
+        document.getElementById("loading").style.display = "block";
         const response=await fetch(url);
         const data=await response.json();
 
@@ -65,14 +74,18 @@ async function buscarClima(){
                 </p>
             </div>
             `;
-            return;
+            document.getElementById("loading").style.display = "none";
+            return;  
         }
+        document.getElementById("loading").style.display = "none";
         mostrarClima(data);
     }
 
     catch(error){
         console.log(error);
     }
+    document.getElementById("loading").style.display = "none";
+    
 }
 
 function mostrarClima(data){
