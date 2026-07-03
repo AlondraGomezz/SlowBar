@@ -58,30 +58,41 @@
 </div>
 
 <div class="row g-4 mt-2">
-    <div class="col-md-6">
-        <div class="glass-card p-4 text-center">
+    <div class="col-md-4">
+        <div class="glass-card p-4 text-center h-100">
             <i class="fa fa-boxes-stacked fs-1 coffee-text"></i>
             <h2 class="mt-3">
                 {{ $totalStock }}
             </h2>
             <p>
-                Stock total disponible
+                Stock total
             </p>
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="glass-card p-4 text-center">
+    <div class="col-md-4">
+        <div class="glass-card p-4 text-center h-100">
             <i class="fa fa-triangle-exclamation fs-1 text-warning"></i>
             <h2 class="mt-3">
                 {{ $lowStockCount }}
             </h2>
             <p>
-                Productos con poco stock
+                Poco stock
             </p>
         </div>
     </div>
-    
+
+    <div class="col-md-4">
+        <div class="glass-card p-4 text-center h-100">
+            <i class="fa fa-circle-xmark fs-1 text-danger"></i>
+            <h2 class="mt-3">
+                {{ $outOfStock }}
+            </h2>
+            <p>
+                Sin stock
+            </p>
+        </div>
+    </div>
 </div>
 
 <div class="row mt-5">

@@ -65,6 +65,11 @@
             Para cualquier duda relacionada con este aviso de privacidad,
             puedes comunicarte con el administrador de SlowBar.
         </p>
+
+         <div class="alert alert-warning rounded-4 mt-4">
+            Última actualización:
+            Julio 2026
+        </div>
     </div>
 </div>
 

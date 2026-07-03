@@ -256,10 +256,13 @@
 </div>
 
 </body>
-<footer class="footer">
-    <p>
-        SlowBar
-    </p>
-
+<footer class="text-center py-4 mt-5">
+    <small class="text-light">
+        © {{ date('Y') }} SlowBar | Todos los derechos reservados
+        <br>
+        <a href="{{ route('privacy') }}" class="coffee-text text-decoration-none">
+            Aviso de privacidad
+        </a>
+    </small>
 </footer>
 </html>
