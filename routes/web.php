@@ -45,7 +45,9 @@ Route::put('/orders/{id}/status',
     ->name('orders.status');
 
 Route::get('/weather', function () {
-    return view('weather');
+    return view('weather', [
+        'apiKey' => config('services.openweather.key')
+    ]);
 })->name('weather');
 
 Route::view('/privacy', 'privacy')->name('privacy');

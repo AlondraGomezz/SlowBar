@@ -45,7 +45,7 @@ async function buscarClima(){
         return;
     }
 
-    const apiKey="2fc3a6a4e1b8dbfad69a912426544b2b";
+    const apiKey = "{{ $apiKey }}";
     const url=`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`;
 
     try{
