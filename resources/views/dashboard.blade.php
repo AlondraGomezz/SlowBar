@@ -84,59 +84,63 @@
     
 </div>
 
-<div class="glass-card p-4 mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h3 class="fw-bold">
+<div class="row mt-5">
+    <div class="col-lg-6">
+        <div class="glass-card p-4">
+            <h4 class="mb-4 coffee-text">
+                <i class="fa fa-triangle-exclamation"></i>
                 Productos con poco stock
-            </h3>
-            <small class="text-light">
-                Revisa los productos que necesitan reabastecimiento.
-            </small>
+            </h4>
+
+            @if($lowStockCount == 0)
+                <div class="alert alert-success rounded-4 mb-0">
+                    Todo el inventario está en buen estado.
+                </div>
+            @else
+
+                <table class="table text-white">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($lowStock as $product)
+                        <tr>
+                            <td>{{ $product->nombre }}</td>
+                            <td>
+                                <span class="badge bg-danger">
+                                    {{ $product->stock }}
+                                </span>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 
-    @if($lowStock->count())
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($lowStock as $product)
-        <tr>
-            <td>
-                @if($product->categoria == 'Postre')
-                    🍰
-                @else
-                    ☕
-                @endif
-                {{ $product->nombre }}
-            </td>
-            <td>
-                {{ $product->categoria }}
-            </td>
-            <td>
-                <span class="badge bg-danger">
-                    {{ $product->stock }}
-                </span>
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
-    @else
-    <div class="text-center py-4">
-        <i class="fa fa-circle-check fa-3x coffee-text mb-3"></i>
-        <h5>
-            Todo el inventario está en buen estado.
-        </h5>
-    </div>
-    @endif
-</div>
+<div class="col-lg-6">
+    <div class="glass-card p-4">
+        <h4 class="mb-4 coffee-text">
+            <i class="fa fa-clock"></i>
+            Últimos productos
+        </h4>
 
+        <ul class="list-group list-group-flush">
+            @foreach($lastProducts as $product)
+            <li class="list-group-item bg-transparent text-white border-secondary">
+                {{ $product->nombre }}
+                <span class="float-end">
+                    ${{ $product->precio }}
+                </span>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+</div>
 
 @endsection
