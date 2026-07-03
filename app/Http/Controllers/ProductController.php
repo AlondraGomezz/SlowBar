@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Order;
+use App\Models\Promotion;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,6 +31,32 @@ class ProductController extends Controller
             'totalStock',
             'averagePrice',
             'search'
+        ));
+    }
+
+    //dashboard
+    public function dashboard()
+    {
+        $totalProducts = Product::count();
+        $totalClients = Client::count();
+        $totalOrders = Order::count();
+        $totalPromotions = Promotion::count();
+        $totalStock = Product::sum('stock');
+        $lowStock = Product::where('stock', '<=', 5)->get();
+        $lowStockCount = Product::where('stock', '<=', 5)->count();
+        $outOfStock = Product::where('stock', 0)->count();
+        $lastProducts = Product::latest()->take(5)->get();
+
+        return view('dashboard', compact(
+            'totalProducts',
+            'totalClients',
+            'totalOrders',
+            'totalPromotions',
+            'totalStock',
+            'lowStock',
+            'lowStockCount',
+            'outOfStock',
+            'lastProducts'
         ));
     }
 

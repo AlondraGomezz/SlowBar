@@ -259,11 +259,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom py-3">
     <div class="container">
-        <a class="navbar-brand fw-bold fs-3" href="/products">
+        <a class="navbar-brand fw-bold fs-3" href="/dashboard">
             SlowBar Admin
         </a>
 
         <div class="d-flex gap-3 align-items-center">
+            <a href="/dashboard" class="text-white text-decoration-none">
+                Dashboard
+            </a>
             <a href="/products" class="text-white text-decoration-none">
                 Productos
             </a>

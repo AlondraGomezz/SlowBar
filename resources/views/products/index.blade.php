@@ -9,20 +9,12 @@
     <div class="row align-items-center mb-5">
         <div class="col-lg-7">
             <p class="coffee-text text-uppercase">
-                Sistema administrativo
+                Gestión de Productos
             </p>
 
-            <h1 class="hero-title">
-                Bienvenido a
-                <span class="coffee-text">
-                    SlowBar
-                </span>
+             <h1 class="hero-title">
+                Productos
             </h1>
-
-            <p class="text-light mt-4 fs-5">
-                Administra productos, inventario y cafetería
-                desde un panel elegante desarrollado en Laravel.
-            </p>
 
             <a href="{{ route('products.create') }}"class="btn btn-coffee mt-3">
                 <i class="fa fa-plus"></i>
@@ -95,7 +87,7 @@
                     </div>
 
                     <div class="fs-1 coffee-text">
-                        <i class="fa fa-dollar-sign"></i>
+                        <i class="fa fa-coins"></i>
                     </div>
 
                 </div>
@@ -119,7 +111,7 @@
         <div class="row g-3">
             <div class="col-md-10">
                 <input type="text" name="search" class="form-control form-control-lg rounded-pill border-0 shadow-sm"
-                       placeholder="Buscar café..." value="{{ $search }}">
+                       placeholder="Buscar producto..." value="{{ $search }}">
             </div>
 
             <div class="col-md-2">
@@ -195,33 +187,43 @@
 
                         <td class="fw-bold">
                             <a href="{{ route('products.show', $product->id) }}"
-                               class="text-decoration-none text-white">
-                                ☕ {{ $product->nombre }}
+                            class="text-decoration-none text-white">
+
+                                <span class="me-1">
+                                    @if($product->categoria == 'Postre')
+                                        🍰
+                                    @else
+                                        ☕
+                                    @endif
+                                </span>
+
+                                {{ $product->nombre }}
+
                             </a>
                         </td>
 
                         <td>
                             @if($product->categoria == 'Caliente')
 
-                                <span class="badge bg-danger rounded-pill px-3">
+                                <span class="badge bg-warning text-dark rounded-pill px-3">
                                     Caliente
                                 </span>
 
                             @elseif($product->categoria == 'Frio')
 
-                                <span class="badge bg-info rounded-pill px-3">
+                                <span class="badge bg-primary rounded-pill px-3">
                                     Frío
                                 </span>
 
                             @elseif($product->categoria == 'Postre')
 
-                                <span class="badge bg-warning text-dark rounded-pill px-3">
+                                <span class="badge bg-secondary text-dark rounded-pill px-3">
                                     Postre
                                 </span>
 
                             @else
 
-                                <span class="badge bg-secondary rounded-pill px-3">
+                                <span class="badge bg-success rounded-pill px-3">
                                     Panadería
                                 </span>
 
@@ -238,10 +240,19 @@
                         </td>
 
                         <td>
-                            <span class="badge bg-success rounded-pill px-3">
-                                {{ $product->stock }}
-                            </span>
-
+                            @if($product->stock > 15)
+                                <span class="badge bg-success rounded-pill px-3">
+                                    {{ $product->stock }} Disponible
+                                </span>
+                            @elseif($product->stock >= 5)
+                                <span class="badge bg-warning text-dark rounded-pill px-3">
+                                    {{ $product->stock }} Poco stock
+                                </span>
+                            @else
+                                <span class="badge bg-danger rounded-pill px-3">
+                                    {{ $product->stock }} Agotado
+                                </span>
+                            @endif
                         </td>
 
                         <td>

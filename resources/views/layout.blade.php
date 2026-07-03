@@ -192,7 +192,7 @@
                 Menú
             </a>
 
-            <a href="/promotions" class="text-white text-decoration-none">
+            <a href="/promotions-public" class="text-white text-decoration-none">
                 Promociones
             </a>
 

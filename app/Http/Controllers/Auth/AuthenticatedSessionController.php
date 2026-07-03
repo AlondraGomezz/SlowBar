@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         if(auth()->user()->role == 'admin')
         {
-            return redirect('/products');
+            return redirect('/dashboard');
         }
 
         return redirect('/');

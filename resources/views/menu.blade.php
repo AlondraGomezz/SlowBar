@@ -41,7 +41,7 @@
 <!-- PRODUCTOS -->
 
 <div class="row g-4" id="productsContainer">
-    @foreach($products as $product)
+    {{-- @foreach($products as $product)
     <div class="col-md-4 product-card">
         <div class="glass-card p-4 h-100 card-hover">
             <div class="text-center mb-4">
@@ -104,36 +104,104 @@
             </div>
         </div>
     </div>
-    @endforeach
+    @endforeach --}}
 </div>
 
 <!-- SCRIPT BUSCADOR -->
 
 <script>
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keyup', function() {
-        let filter = searchInput.value.toLowerCase();
 
-        let cards = document.querySelectorAll('.product-card');
+const container = document.getElementById("productsContainer");
 
-        cards.forEach(card => {
-            let productName = card.querySelector('.product-name')
-                                  .textContent
-                                  .toLowerCase();
+function obtenerIcono(categoria){
 
-            if(productName.includes(filter)){
+    switch(categoria){
 
-                card.style.display = '';
+        case "Caliente":
+            return "☕";
 
-            }else{
+        case "Frio":
+            return "🧋";
 
-                card.style.display = 'none';
+        case "Postre":
+            return "🍰";
 
-            }
+        case "Pan":
+            return "🥐";
 
-        });
+        default:
+            return "☕";
+
+    }
+
+}
+
+fetch("/api/products")
+.then(response => response.json())
+.then(resultado => {
+
+    resultado.data.forEach(producto => {
+
+        container.innerHTML += `
+
+        <div class="col-md-4 product-card">
+
+            <div class="glass-card p-4 h-100 card-hover">
+                <div class="text-center mb-4">
+                    <div class="display-1">
+                        ${obtenerIcono(producto.categoria)}
+                    </div>
+                </div>
+
+                <h3 class="fw-bold product-name">
+                    ${producto.nombre}
+                </h3>
+
+                <p class="text-light">
+                    ${producto.descripcion ?? ""}
+                </p>
+
+                <div class="mt-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <span class="badge bg-warning text-dark">
+                            ${producto.categoria}
+                        </span>
+
+                        <h4 class="coffee-text fw-bold">
+                            $${producto.precio}
+                        </h4>
+
+                    </div>
+
+                    <a href="/login"
+                       class="btn btn-outline-light w-100 rounded-pill">
+
+                        Inicia sesión para ordenar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
 
     });
+
+});
+
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", function(){
+    let filter = this.value.toLowerCase();
+    document.querySelectorAll(".product-card").forEach(card=>{
+        let nombre = card.querySelector(".product-name").textContent.toLowerCase();
+        card.style.display = nombre.includes(filter) ? "" : "none";
+    });
+});
 
 </script>
 

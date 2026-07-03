@@ -16,8 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/menu', function () {
-    $products = Product::all();
-    return view('menu', compact('products'));
+    return view('menu');
 });
 
 Route::get('/about', function () {
@@ -28,7 +27,7 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/promotions', [PromotionController::class, 'publicIndex'])
+Route::get('/promotions-public', [PromotionController::class, 'publicIndex'])
     ->name('promotions.public');
 
 Route::post('/make-order/{id}', [OrderController::class, 'makeOrder'])
@@ -48,9 +47,11 @@ Route::put('/orders/{id}/status',
 // rutas admin
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [ProductController::class, 'dashboard'])->name('dashboard');
     Route::resource('products', ProductController::class);
     Route::resource('clients', ClientController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('promotions', PromotionController::class);
 
 });
 
