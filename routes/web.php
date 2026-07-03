@@ -48,6 +48,8 @@ Route::get('/weather', function () {
     return view('weather');
 })->name('weather');
 
+Route::view('/privacy', 'privacy')->name('privacy');
+
 // rutas admin
 
 Route::middleware(['auth', 'admin'])->group(function () {

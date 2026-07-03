@@ -206,6 +206,10 @@
             </a>
             @endauth
 
+            <a href="/privacy" class="text-white text-decoration-none">
+                Aviso de Privacidad
+            </a>
+
             <a href="/contact" class="text-white text-decoration-none">
                 Contacto
             </a>
