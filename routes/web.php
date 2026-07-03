@@ -44,6 +44,10 @@ Route::put('/orders/{id}/status',
     ->middleware(['auth', 'admin'])
     ->name('orders.status');
 
+Route::get('/weather', function () {
+    return view('weather');
+})->name('weather');
+
 // rutas admin
 
 Route::middleware(['auth', 'admin'])->group(function () {

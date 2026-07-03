@@ -188,8 +188,12 @@
                 Nosotros
             </a>
 
+            <a href="/weather" class="text-white text-decoration-none">
+                Clima
+            </a>
+
             <a href="/menu" class="text-white text-decoration-none">
-                Menú
+                Menú 
             </a>
 
             <a href="/promotions-public" class="text-white text-decoration-none">
